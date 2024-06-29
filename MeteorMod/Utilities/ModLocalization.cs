@@ -72,7 +72,7 @@ namespace MeteorMod.Utilities {
 
         // Parse and save the localization file
         public ModLocalizationDictionary() {
-            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("GVHHelper.localization.json");
+            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("MeteorMod.localization.json");
             if(stream == null) {
                 MelonLogger.Error("Could not find localization file");
                 return;

@@ -17,7 +17,7 @@ namespace MeteorMod.Settings {
         private static GameObject? subtitles;
 
         public static void Init() {
-            Mgr_ModSettings.AddSetting<ModBoolSetting, bool>("GVHHelper", disableSubtitles);
+            Mgr_ModSettings.AddSetting<ModBoolSetting, bool>("MeteorMod", disableSubtitles);
             disableSubtitles.onValueChanged = (Setting.ValueChangeCallback)Delegate.Combine(
                 disableSubtitles.onValueChanged,
                 new Setting.ValueChangeCallback(DisableSubtitlesSettingChanged)

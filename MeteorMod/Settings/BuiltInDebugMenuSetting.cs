@@ -18,7 +18,7 @@ namespace MeteorMod.Settings {
         public static Mgr_DebugTools? debugTools;
 
         public static void Init() {
-            Mgr_ModSettings.AddSetting<ModBoolSetting, bool>("GVHHelper", enableDebugSetting);
+            Mgr_ModSettings.AddSetting<ModBoolSetting, bool>("MeteorMod", enableDebugSetting);
             enableDebugSetting.onValueChanged = (Setting.ValueChangeCallback)Delegate.Combine(
                 enableDebugSetting.onValueChanged,
                 new Setting.ValueChangeCallback(DebugSettingChanged)

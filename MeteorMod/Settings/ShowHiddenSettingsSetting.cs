@@ -17,7 +17,7 @@ namespace MeteorMod.Settings {
         private static List<SettingsItem> disabledSettings = new List<SettingsItem>();
 
         public static void Init() {
-            Mgr_ModSettings.AddSetting<ModBoolSetting, bool>("GVHHelper", enableHiddenSettings);
+            Mgr_ModSettings.AddSetting<ModBoolSetting, bool>("MeteorMod", enableHiddenSettings);
             enableHiddenSettings.onValueChanged = (Setting.ValueChangeCallback)Delegate.Combine(
                 enableHiddenSettings.onValueChanged,
                 new Setting.ValueChangeCallback(ShowHiddenSettingChanged)

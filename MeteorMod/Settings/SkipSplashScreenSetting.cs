@@ -16,7 +16,7 @@ namespace MeteorMod.Settings {
         );
 
         public static void Init() {
-            Mgr_ModSettings.AddSetting<ModBoolSetting, bool>("GVHHelper", skipSplashScreenSetting);
+            Mgr_ModSettings.AddSetting<ModBoolSetting, bool>("MeteorMod", skipSplashScreenSetting);
         }
     }
 

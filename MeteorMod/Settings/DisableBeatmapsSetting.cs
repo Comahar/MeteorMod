@@ -32,7 +32,7 @@ namespace MeteorMod.Settings {
 
 
         public static void Init() {
-            Mgr_ModSettings.AddSetting<ModBoolSetting, bool>("GVHHelper", disableBeatmapsSetting);
+            Mgr_ModSettings.AddSetting<ModBoolSetting, bool>("MeteorMod", disableBeatmapsSetting);
             disableBeatmapsSetting.onValueChanged = (Setting.ValueChangeCallback)Delegate.Combine(
                 disableBeatmapsSetting.onValueChanged,
                 new Setting.ValueChangeCallback(DisableBeatmapsSettingChanged)
