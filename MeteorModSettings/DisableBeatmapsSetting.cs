@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using MelonLoader;
 using UnityEngine;
 using MeteorMod.ModSettings;
 using MeteorMod.ModSettings.ModSettingItems;
+using UnityEngine.SceneManagement;
 
-namespace MeteorMod.Settings {
+namespace MeteorMod.MeteorModSettings {
     public static class DisableBeatmapsSetting {
         public static ModBoolSetting disableBeatmapsSetting = new ModBoolSetting(
             "DisableBeatmaps",
@@ -15,11 +15,11 @@ namespace MeteorMod.Settings {
             false
         );
 
-        public static GameObject? GameplayUI;
+        private static GameObject GameplayUI;
         public static List<KeyCode> KeyCombos = new List<KeyCode> { KeyCode.LeftControl, KeyCode.LeftShift, KeyCode.F };
         private static bool comboKeyDown = false;
 
-        public static bool comboPressing {
+        private static bool IsPressingCombo {
             get {
                 foreach(KeyCode key in KeyCombos) {
                     if(!Input.GetKey(key)) {
@@ -30,18 +30,39 @@ namespace MeteorMod.Settings {
             }
         }
 
-
         public static void Init() {
-            Mgr_ModSettings.AddSetting<ModBoolSetting, bool>("MeteorMod", disableBeatmapsSetting);
-            disableBeatmapsSetting.onValueChanged = (Setting.ValueChangeCallback)Delegate.Combine(
-                disableBeatmapsSetting.onValueChanged,
-                new Setting.ValueChangeCallback(DisableBeatmapsSettingChanged)
-            );
+            Mgr_ModSettings.AddSetting<ModBoolSetting, bool>(Plugin.metadata, disableBeatmapsSetting);
+            disableBeatmapsSetting.onValueChanged += DisableBeatmapsSettingChanged;
+
+            //SceneManager.sceneLoaded += SceneLoaded;
+            Plugin.OnUpdate += OnUpdate;
         }
 
-        public static void OnSceneWasLoaded(int buildIndex, string sceneName) {
+        public static void SceneLoaded(Scene scene, LoadSceneMode mode) {
+            Plugin.LOG.LogWarning($"DisableBeatmapsSetting SceneLoaded");
+            if (!SceneHelper.IsPerformenceScene)
+                return;
             GameplayUI = GameObject.Find("GameplayUI Root");
+            if(GameplayUI == null) {
+                Plugin.LOG.LogWarning("Could not find GameplayUI Root");
+                return;
+            }
             SetBeatmapState(!disableBeatmapsSetting.value);
+            Plugin.LOG.LogWarning($"DisableBeatmapsSetting SceneLoaded finish");
+        }
+
+        public static void OnUpdate() {
+            if(GameplayUI == null) {
+                return;
+            }
+            if(IsPressingCombo) {
+                if(!comboKeyDown) {
+                    comboKeyDown = true;
+                    disableBeatmapsSetting.SetSettingValue(!disableBeatmapsSetting.value);
+                }
+            } else {
+                comboKeyDown = false;
+            }
         }
 
         public static void DisableBeatmapsSettingChanged() {
@@ -53,21 +74,8 @@ namespace MeteorMod.Settings {
                 return;
             }
             GameplayUI.SetActive(state);
-            MelonLogger.Msg($"Set beatmap GameplayUI to {state}");
+            Plugin.LOG.LogInfo($"Set beatmap GameplayUI to {state}");
         }
 
-        public static void OnUpdate() {
-            if(GameplayUI == null) {
-                return;
-            }
-            if(comboPressing) {
-                if(!comboKeyDown) {
-                    comboKeyDown = true;
-                    disableBeatmapsSetting.SetSettingValue(!disableBeatmapsSetting.value);
-                }
-            } else {
-                comboKeyDown = false;
-            }
-        }
     }
 }

@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine.SceneManagement;
-using MelonLoader;
 using HarmonyLib;
 using MeteorMod.ModSettings;
 using MeteorMod.ModSettings.ModSettingItems;
 
-namespace MeteorMod.Settings {
+namespace MeteorMod.MeteorModSettings {
     public static class SkipSplashScreenSetting {
         public static ModBoolSetting skipSplashScreenSetting = new ModBoolSetting(
             "SkipSplashScreen",
@@ -16,25 +15,26 @@ namespace MeteorMod.Settings {
         );
 
         public static void Init() {
-            Mgr_ModSettings.AddSetting<ModBoolSetting, bool>("MeteorMod", skipSplashScreenSetting);
+            Mgr_ModSettings.AddSetting<ModBoolSetting, bool>(Plugin.metadata, skipSplashScreenSetting);
         }
     }
 
     [HarmonyPatch(typeof(SplashScreen), nameof(SplashScreen.Start))]
     public class SplashScreen_Start_Patch_Skip {
-        public static bool Prefix(SplashScreen __instance) {
-            bool skipSplashScreen = SkipSplashScreenSetting.skipSplashScreenSetting.value;
+        static bool Prefix(SplashScreen __instance) {
+            bool skipSplashScreen = true;
+            //bool skipSplashScreen = SkipSplashScreenSetting.skipSplashScreenSetting.value;
 
             if(!skipSplashScreen) {
                 return true;
             }
-            MelonLogger.Msg("Skipping SplashScreen");
+            Plugin.LOG.LogInfo("Skipping SplashScreen");
             var result = Skip(__instance);
             __instance.StartCoroutine(result);
             return false;
         }
 
-        public static IEnumerator Skip(SplashScreen instance) {
+        static IEnumerator Skip(SplashScreen instance) {
             var loadSceneOp = SceneManager.LoadSceneAsync("Title", LoadSceneMode.Additive);
             while(!loadSceneOp.isDone) {
                 yield return null;

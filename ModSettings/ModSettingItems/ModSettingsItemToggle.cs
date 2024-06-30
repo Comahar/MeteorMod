@@ -25,14 +25,14 @@ namespace MeteorMod.ModSettings.ModSettingItems {
             }
         }
 
-        public static ModSettingsItemToggle? Create(string objectName, string text, string dictionary, ModBoolSetting modBoolSetting, SettingsPage page) {
-            if(UIBuilder.Instance.togglePrefab == null) {
-                MelonLoader.MelonLogger.Error("Tried to create a toggle setting item but list prefab is null");
+        public static ModSettingsItemToggle Create(string objectName, string text, string dictionary, ModBoolSetting modBoolSetting, SettingsPage page) {
+            if(ModSettingsUIBuilder.Instance.togglePrefab == null) {
+                Plugin.LOG.LogError("Tried to create a toggle setting item but list prefab is null");
                 return null;
             }
             // Create toggle
             Transform parent = page.transform.Find("ContentCanvasGroup/ContentParent/Content/Viewport/Items");
-            GameObject toggleGameObject = GameObject.Instantiate(UIBuilder.Instance.togglePrefab, parent);
+            GameObject toggleGameObject = GameObject.Instantiate(ModSettingsUIBuilder.Instance.togglePrefab, parent);
             toggleGameObject.name = objectName;
             toggleGameObject.SetActive(true);
 
@@ -61,19 +61,6 @@ namespace MeteorMod.ModSettings.ModSettingItems {
             string settingKey,
             string settingName,
             string tooltip,
-            string uiTextDictionary
-        ) {
-            this._settingKey = settingKey;
-            this._settingName = settingName;
-            this._tooltip = tooltip;
-
-            this.uiTextDictionary = uiTextDictionary;
-        }
-
-        public ModBoolSetting(
-            string settingKey,
-            string settingName,
-            string tooltip,
             string uiTextDictionary,
             bool defaultValue
         ) {
@@ -84,6 +71,8 @@ namespace MeteorMod.ModSettings.ModSettingItems {
 
             this.uiTextDictionary = uiTextDictionary;
         }
+
+        public override SettingsItem CreateUIElement() {
 
         public void SetSettingValue(bool value, bool save = true, bool notify = true) {
             this.SetValue(value, false, notify);

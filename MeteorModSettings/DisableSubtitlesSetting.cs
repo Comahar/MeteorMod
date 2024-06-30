@@ -1,10 +1,11 @@
 ﻿using System;
-using MelonLoader;
 using UnityEngine;
 using MeteorMod.ModSettings;
 using MeteorMod.ModSettings.ModSettingItems;
+using BepInEx;
+using UnityEngine.SceneManagement;
 
-namespace MeteorMod.Settings {
+namespace MeteorMod.MeteorModSettings {
     public static class DisableSubtitlesSetting {
         public static ModBoolSetting disableSubtitles = new ModBoolSetting(
             "DisableSubtitles",
@@ -14,25 +15,26 @@ namespace MeteorMod.Settings {
             false
         );
 
-        private static GameObject? subtitles;
+        private static GameObject subtitles;
 
         public static void Init() {
-            Mgr_ModSettings.AddSetting<ModBoolSetting, bool>("MeteorMod", disableSubtitles);
-            disableSubtitles.onValueChanged = (Setting.ValueChangeCallback)Delegate.Combine(
-                disableSubtitles.onValueChanged,
-                new Setting.ValueChangeCallback(DisableSubtitlesSettingChanged)
-            );
+            Mgr_ModSettings.AddSetting<ModBoolSetting, bool>(Plugin.metadata, disableSubtitles, true);
+            disableSubtitles.onValueChanged += DisableSubtitlesSettingChanged;
+
+            //SceneManager.sceneLoaded += SceneLoaded;
         }
 
-        public static void OnSceneWasInitialized(int buildIndex, string sceneName) {
-            if(sceneName == "Splash" || sceneName == "Title" || MeteorMod.IsMinigameScene || MeteorMod.IsPerformenceScene)
+        public static void SceneLoaded(Scene scene, LoadSceneMode mode) {
+            Plugin.LOG.LogWarning($"DisableSubtitlesSetting SceneLoaded");
+            if(!SceneHelper.IsGameScene)
                 return;
             subtitles = GameObject.Find("SCENE_MASTER/SpeechMaster/SpeechCanvas/SafeArea/Subtitles");
             if(subtitles == null) {
-                MelonLogger.Warning("Could not find DialogueSubtitles GameObject");
+                Plugin.LOG.LogWarning("Could not find DialogueSubtitles GameObject");
                 return;
             }
             SetSubtitlesState(!disableSubtitles.value);
+            Plugin.LOG.LogWarning($"DisableSubtitlesSetting SceneLoaded finish");
         }
 
         public static void DisableSubtitlesSettingChanged() {

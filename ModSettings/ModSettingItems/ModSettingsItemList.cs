@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace MeteorMod.ModSettings.ModSettingItems {
-    public class ModSettingsItemSlider : MonoBehaviour {
-        public SettingsItemSlider settingsItemSlider {
+    public class ModSettingsItemList : MonoBehaviour {
+        public SettingsItemList settingsItemList {
             get {
-                return this.GetComponent<SettingsItemSlider>();
+                return this.GetComponent<SettingsItemList>();
             }
         }
 
@@ -23,21 +24,21 @@ namespace MeteorMod.ModSettings.ModSettingItems {
             }
         }
 
-        public static ModSettingsItemSlider? Create(string objectName, string text, string dictionary, ModFloatSetting modFloatSetting, SettingsPage page) {
-            if(UIBuilder.Instance.sliderPrefab == null) {
-                MelonLoader.MelonLogger.Error("Tried to create a slider setting item but slider prefab is null");
+        public static ModSettingsItemList Create<T>(string objectName, string text, string dictionary, ModListSetting<T> modSetting, SettingsPage page) {
+            if (ModSettingsUIBuilder.Instance.listPrefab == null) {
+                Plugin.LOG.LogError("Tried to create a list setting item but list prefab is null");
                 return null;
             }
-            // Create slider
+            // Create list
             Transform parent = page.transform.Find("ContentCanvasGroup/ContentParent/Content/Viewport/Items");
-            GameObject sliderGameObject = GameObject.Instantiate(UIBuilder.Instance.sliderPrefab, parent);
-            sliderGameObject.name = objectName;
-            sliderGameObject.SetActive(true);
+            GameObject listGameObject = GameObject.Instantiate(ModSettingsUIBuilder.Instance.listPrefab, parent);
+            listGameObject.name = objectName;
+            listGameObject.SetActive(true);
 
             // Add this component to gameobject
-            ModSettingsItemSlider thisComponent = sliderGameObject.AddComponent<ModSettingsItemSlider>();
+            ModSettingsItemList thisComponent = listGameObject.AddComponent<ModSettingsItemList>();
             thisComponent.SetText(text, dictionary);
-            thisComponent.settingsItemSlider.floatSetting = modFloatSetting;
+            thisComponent.settingsItemList.settingAsset = modSetting;
             return thisComponent;
         }
 
@@ -49,33 +50,41 @@ namespace MeteorMod.ModSettings.ModSettingItems {
             this.localiser.BaseText = text;
             this.localiser.Dictionary = dictionary;
         }
-
     }
 
-
-    public class ModFloatSetting : FloatSetting, IModSetting<float> {
+    public class ModListSetting<T> : Setting<T>, IModSetting<int> {
         public string uiTextDictionary { get; set; }
 
-        public ModFloatSetting(
+        public ModListSetting(
             string settingKey,
             string settingName,
             string tooltip,
             string uiTextDictionary,
-            float defaultValue
+            T defaultValue,
+            List<SettingsOption<T>> options
         ) {
             this._settingKey = settingKey;
             this._settingName = settingName;
             this._tooltip = tooltip;
             this.defaultValue = defaultValue;
+            this.options = options;
 
             this.uiTextDictionary = uiTextDictionary;
         }
 
-        public void SetSettingValue(float value, bool save = true, bool notify = true) {
+        public void SetSettingValue(int value, bool save = true, bool notify = true) {
             this.SetValue(value, false, notify);
             if(save) {
                 Mgr_ModSettings.Instance.SaveSettings();
             }
+        }
+
+        public override bool TryParseFromString(string value) {
+            if(int.TryParse(value, out int result)) {
+                this.SetValue(result, false, false);
+                return true;
+            }
+            return false;
         }
     }
 }
