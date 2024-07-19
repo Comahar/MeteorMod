@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "MeteorMod": {
+      "commandName": "Project"
+    },
+    "Profile 1": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\Efe\\Desktop\\GVH\\Goodbye Volcano High\\Goodbye Volcano High.exe"
+    }
+  }
+}

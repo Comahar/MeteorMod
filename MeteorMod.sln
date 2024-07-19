@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeteorMod", "MeteorMod.csproj", "{B26280B8-958C-4B12-A749-98ECC2B6BCEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeteorMod", "MeteorMod\MeteorMod.csproj", "{B26280B8-958C-4B12-A749-98ECC2B6BCEB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeteorCore", "MeteorCore\MeteorCore.csproj", "{3B4788EB-05FE-41BF-A283-319A1DEE782E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeteorCoreExample", "MeteorCoreExample\MeteorCoreExample.csproj", "{796069E8-EF88-4B9B-87D0-B6DAC945226C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{B26280B8-958C-4B12-A749-98ECC2B6BCEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B26280B8-958C-4B12-A749-98ECC2B6BCEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B26280B8-958C-4B12-A749-98ECC2B6BCEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B4788EB-05FE-41BF-A283-319A1DEE782E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B4788EB-05FE-41BF-A283-319A1DEE782E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B4788EB-05FE-41BF-A283-319A1DEE782E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B4788EB-05FE-41BF-A283-319A1DEE782E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{796069E8-EF88-4B9B-87D0-B6DAC945226C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{796069E8-EF88-4B9B-87D0-B6DAC945226C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{796069E8-EF88-4B9B-87D0-B6DAC945226C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{796069E8-EF88-4B9B-87D0-B6DAC945226C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
