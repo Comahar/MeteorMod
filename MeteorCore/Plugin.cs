@@ -3,6 +3,7 @@ using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
 using MeteorCore.Setting;
+using BepInEx.Configuration;
 
 namespace MeteorCore {
     [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
@@ -13,8 +14,9 @@ namespace MeteorCore {
         internal static BepInPlugin metadata;
 
         private void Awake() {
+            ConfigEntry<bool> unityLogging = this.Config.Bind("General", "UnityLogging", true, "Enables unity logging");
             // Enable unity logging, this is disabled by default for some reason
-            Debug.unityLogger.logEnabled = true;
+            Debug.unityLogger.logEnabled = unityLogging.Value;
             Debug.unityLogger.filterLogType = LogType.Warning;
 
             metadata = MetadataHelper.GetMetadata(this);
