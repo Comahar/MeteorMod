@@ -2,8 +2,8 @@
 
 ## Installation
 
-- Download and install [MelonLoader installer](https://github.com/HerpDerpinstine/MelonLoader/releases/latest/download/MelonLoader.Installer.exe) by selecting the game's executable.
-    - You can also install it manually [here](https://melonwiki.xyz/#/README?id=manual-installation).
+- Download and install [BepinEx](https://docs.bepinex.dev/articles/user_guide/installation/index.html).
+    - You can also follow onyx-mp4's beatiful [BepinEx installation guide](https://onyx-mp4.github.io/?scene=bepinex-unzip).
 - Download latest release from [Releases](https://github.com/Comahar/MeteorMod/releases/latest/download/MeteorMod.zip).
 - Extract the zip file to your game's folder.
 
@@ -38,22 +38,21 @@ Shows hidden settings created by the developer. As they are hidden, there is a g
 
 Disables rhythm game segments' interactivity and UI. Toggle in a performance with CTRL+SHIFT+F.
 
-### Mod Settings Framework
-
-This mod creates a framework for other mods to create their own settings. It handles saving and loading settings and also creates a settings menu.
-
-### Mod Localization Framework
-
-This mod creates a framework for other mods to create their own localization files.
-
 ### Fixes
 
 - Fixes a visual bug where a toggle setting resets to the previous value when changing settings pages.
 
+## MeteorCore
+
+### Plugin Settings Framework
+
+MeteorCore allows other plugins to create their own settings. It handles saving, loading, creating settings pages and UI items, also comes with basic UI items for common setting types.
+
+### Plugin Localization Framework
+
+MeteorCore creates a framework for other plugins to have their own localisation files.
 
 ## Development
-
-To develop this mod, you will need Visual Studio 2022 and the .NET SDK. Don't forget to set the path to the game in the MeteorMod.csproj GVHPath.
 
 ### Additional Tools
 - [ILSpy](https://github.com/icsharpcode/ILSpy) or [dnSpy](https://github.com/dnSpy/dnSpy)
@@ -83,7 +82,7 @@ Even though some of these may be impossible to implement due to the game's limit
 	- [ ] Disable beatcatcher sounds
 - [ ] Disable affinity remember icon (is this neeeded?)
 - [ ] Affinity Editor (needs custom settings menu)
-- [ ] Chapter Select (waiting for @onyx.eyes response)
+- [x] Chapter Select (check out [ChapterSelect](https://github.com/onyx-mp4/ChapterSelect))
 - [ ] Post Episode Report (does it even work? how to hook?)
 - [ ] Custom Beatmaps
 - [ ] Custom Songs
@@ -92,14 +91,14 @@ Even though some of these may be impossible to implement due to the game's limit
 
 ## Contributing
 
-Feel free to contribute to this mod by creating a pull request. Even if you don't know how to code, you can still contribute by creating an issue or a discussion. You can also suggest new features.
+Feel free to contribute to this plugin by creating a pull request. Even if you don't know how to code, you can still contribute by creating an issue or a discussion. You can also suggest new features.
 
 
 ## Credits
 
-- @sharky1996 for inspiring me to create this mod.
-- @hadradavus and @onyx.eyes for their unintentional help with this mod.
-- @synedrus for selecting the mod's name.
+- @sharky1996 for inspiring me to create this plugin.
+- @hadradavus and @onyx.eyes for their help with this plugin.
+- @synedrus for selecting the plugin's name.
 
 
 ## License
