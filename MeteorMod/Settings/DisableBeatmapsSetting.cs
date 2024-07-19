@@ -60,7 +60,7 @@ public static class DisableBeatmapsSetting {
         if(IsPressingCombo) {
             if(!comboKeyDown) {
                 comboKeyDown = true;
-                disableBeatmapsSetting.SetValue(value: true, save: true, pending: false, notify: true);
+                disableBeatmapsSetting.SetValue(value: !disableBeatmapsSetting.Value, save: true, pending: false, notify: true);
             }
         } else {
             comboKeyDown = false;
