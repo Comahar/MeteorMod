@@ -40,8 +40,6 @@ public class Plugin : BaseUnityPlugin {
 
         metadata = MetadataHelper.GetMetadata(this);
 
-        Harmony.CreateAndPatchAll(typeof(SplashScreen_Start_Patch_Skip));
-
         // Register localisation
         PluginLocaliser.RegisterPlugin(metadata);
 
@@ -119,28 +117,5 @@ public class Plugin : BaseUnityPlugin {
         Mgr_PluginSettings.AddSetting<Color, MySettingColorUIItem>(this.colorSetting, "Examples", metadata);
         // while using PluginSettingListUIItem must have a concrete type and setting type must be int
         Mgr_PluginSettings.AddSetting<int, PluginStringListSettingUIItem>(this.listSetting, "Examples", metadata);
-    }
-}
-
-
-[HarmonyPatch(typeof(SplashScreen), nameof(SplashScreen.Start))]
-public class SplashScreen_Start_Patch_Skip {
-    static bool Prefix(SplashScreen __instance) {
-        bool skipSplashScreen = true;
-
-        if(!skipSplashScreen) {
-            return true;
-        }
-        var result = Skip(__instance);
-        __instance.StartCoroutine(result);
-        return false;
-    }
-
-    static System.Collections.IEnumerator Skip(SplashScreen instance) {
-        var loadSceneOp = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("Title", UnityEngine.SceneManagement.LoadSceneMode.Additive);
-        while(!loadSceneOp.isDone) {
-            yield return null;
-        }
-        UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(instance.gameObject.scene);
     }
 }

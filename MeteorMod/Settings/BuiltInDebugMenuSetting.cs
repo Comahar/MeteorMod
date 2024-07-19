@@ -39,7 +39,6 @@ public static class BuiltInDebugMenuSetting {
         // early return if not title scene
         if(!MeteorCore.SceneHelper.IsTitleScene || !firstSceneLoad)
             return;
-        Plugin.Logger.LogWarning($"BuiltInDebugMenuSetting SceneLoaded");
 
         firstSceneLoad = false;
 
