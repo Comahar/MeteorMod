@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using HarmonyLib;
 using MeteorCore.Setting;
 using MeteorCore.Setting.Interfaces;
 
@@ -44,5 +45,22 @@ public static class DisableSubtitlesSetting {
         if(subtitlesGameObject != null) {
             subtitlesGameObject.SetActive(state);
         }
+    }
+}
+
+/*
+* This is the original code
+* 	public void ClearSubtitles(bool playHideAnim = false)
+*	{
+*		this.SubtitlesController.ClearSubtitles(playHideAnim);
+*		this.LlController.ClearSubtitles(playHideAnim, false);
+*	}
+* The patch is needed when the subtitles are disabled because this method will throw an exception that interrupts new scene loading
+*/
+[HarmonyPatch(typeof(InkMaster), nameof(InkMaster.ClearSubtitles))]
+public static class ClearSubtitlesPatch {
+    static bool Prefix(InkMaster __instance) {
+        // skip the original method by returning false if SubtitlesController is null
+        return __instance.SubtitlesController != null;
     }
 }
