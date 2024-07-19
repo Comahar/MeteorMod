@@ -1,48 +1,66 @@
-﻿using System;
-using MelonLoader;
-using UnityEngine;
-using MeteorMod.ModSettings;
-using MeteorMod.ModSettings.ModSettingItems;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+using HarmonyLib;
+using MeteorCore.Setting;
+using MeteorCore.Setting.Interfaces;
 
-namespace MeteorMod.Settings {
-    public static class DisableSubtitlesSetting {
-        public static ModBoolSetting disableSubtitles = new ModBoolSetting(
-            "DisableSubtitles",
-            "Disable Subtitles",
-            "Disables subtitles in the game",
-            "MISC",
-            false
+namespace MeteorMod.Settings;
+public static class DisableSubtitlesSetting {
+    public static PluginSettingBool disableSubtitlesSetting;
+
+    private static GameObject subtitlesGameObject;
+
+    public static void Init() {
+        disableSubtitlesSetting = new PluginSettingBool(
+            settingKey: "DisableSubtitles",
+            settingName: "Disable Subtitles",
+            tooltip: "Disables subtitles in the game",
+            configSection: MyPluginInfo.PLUGIN_NAME,
+            owner: Plugin.metadata,
+            defaultValue: false
         );
 
-        private static GameObject? subtitles;
+        Mgr_PluginSettings.AddSetting<bool, PluginSettingToggleUIItem>(disableSubtitlesSetting, MyPluginInfo.PLUGIN_NAME, Plugin.metadata);
+        disableSubtitlesSetting.OnValueChanged += DisableSubtitlesSettingChanged;
 
-        public static void Init() {
-            Mgr_ModSettings.AddSetting<ModBoolSetting, bool>("MeteorMod", disableSubtitles);
-            disableSubtitles.onValueChanged = (Setting.ValueChangeCallback)Delegate.Combine(
-                disableSubtitles.onValueChanged,
-                new Setting.ValueChangeCallback(DisableSubtitlesSettingChanged)
-            );
-        }
+        SceneManager.sceneLoaded += SceneLoaded;
+    }
 
-        public static void OnSceneWasInitialized(int buildIndex, string sceneName) {
-            if(sceneName == "Splash" || sceneName == "Title" || MeteorMod.IsMinigameScene || MeteorMod.IsPerformenceScene)
-                return;
-            subtitles = GameObject.Find("SCENE_MASTER/SpeechMaster/SpeechCanvas/SafeArea/Subtitles");
-            if(subtitles == null) {
-                MelonLogger.Warning("Could not find DialogueSubtitles GameObject");
-                return;
-            }
-            SetSubtitlesState(!disableSubtitles.value);
+    public static void SceneLoaded(Scene scene, LoadSceneMode mode) {
+        if(!MeteorCore.SceneHelper.IsGameScene)
+            return;
+        subtitlesGameObject = GameObject.Find("SCENE_MASTER/SpeechMaster/SpeechCanvas/SafeArea/Subtitles");
+        if(subtitlesGameObject == null) {
+            Plugin.Logger.LogWarning("Could not find DialogueSubtitles GameObject");
+            return;
         }
+        SetSubtitlesState(!disableSubtitlesSetting.Value);
+    }
 
-        public static void DisableSubtitlesSettingChanged() {
-            SetSubtitlesState(!disableSubtitles.value);
-        }
+    public static void DisableSubtitlesSettingChanged(IPluginSetting<bool> setting) {
+        SetSubtitlesState(!setting.Value);
+    }
 
-        public static void SetSubtitlesState(bool state) {
-            if(subtitles != null) {
-                subtitles.SetActive(state);
-            }
+    public static void SetSubtitlesState(bool state) {
+        if(subtitlesGameObject != null) {
+            subtitlesGameObject.SetActive(state);
         }
+    }
+}
+
+/*
+* This is the original code
+* 	public void ClearSubtitles(bool playHideAnim = false)
+*	{
+*		this.SubtitlesController.ClearSubtitles(playHideAnim);
+*		this.LlController.ClearSubtitles(playHideAnim, false);
+*	}
+* The patch is needed when the subtitles are disabled because this method will throw an exception that interrupts new scene loading
+*/
+[HarmonyPatch(typeof(InkMaster), nameof(InkMaster.ClearSubtitles))]
+public static class ClearSubtitlesPatch {
+    static bool Prefix(InkMaster __instance) {
+        // skip the original method by returning false if SubtitlesController is null
+        return __instance.SubtitlesController != null;
     }
 }

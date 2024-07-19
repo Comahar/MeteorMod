@@ -1,0 +1,40 @@
+{
+  "dictionary": {
+    "en": {
+      "Default": "Default",
+      "On": "On",
+      "Off": "Off"
+    },
+    "fr": {
+      "Default": "Valeur par défaut",
+      "On": "On",
+      "Off": "Off"
+    },
+    "it": {
+      "Default": "Valore predefinito",
+      "On": "Si",
+      "Off": "No"
+    },
+    "de": {
+      "Default": "Standardwert",
+      "On": "Ein",
+      "Off": "Aus"
+    },
+    "es": {
+      "Default": "Valor por defecto",
+      "On": "Sí",
+      "Off": "No"
+    },
+    "ru": {
+      "Default": "Значение по умолчанию",
+      "On": "Вкл",
+      "Off": "Выкл"
+    },
+    "ja": {
+      "Default": "デフォルト",
+      "On": "オン",
+      "Off": "オフ"
+    }
+  },
+  "additionalDictionaries": {}
+}

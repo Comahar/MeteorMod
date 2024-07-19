@@ -1,96 +1,106 @@
-﻿using MelonLoader;
-using System;
-using UnityEngine;
-using MeteorMod.ModSettings;
-using MeteorMod.ModSettings.ModSettingItems;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+using MeteorCore.Setting;
+using MeteorCore.Setting.Interfaces;
 
-namespace MeteorMod.Settings {
-    public static class BuiltInDebugMenuSetting {
-        public static ModBoolSetting enableDebugSetting = new ModBoolSetting(
-            "EnableDebugMenu",
-            "Enable Debug Menu",
-            "Enables debugTools and developers debug menu\n\nAccess the menu with CTRL+SHIFT+D",
-            "MISC",
-            false
+namespace MeteorMod.Settings;
+
+public static class BuiltInDebugMenuSetting {
+    public static PluginSettingBool enableDebugSetting;
+
+    public static DebugMenuToggle debugMenuToggle;
+    public static Mgr_DebugTools debugTools;
+
+
+    public static void Init() {
+        enableDebugSetting = new PluginSettingBool(
+            settingKey: "EnableDebugMenu",
+            settingName: "Enable Debug Menu",
+            tooltip: "Enables debugTools and debug menu\n\nAccess the menu with CTRL+SHIFT+D",
+            configSection: MyPluginInfo.PLUGIN_NAME,
+            owner: Plugin.metadata,
+            defaultValue: false
         );
 
-        public static DebugMenuToggle? debugMenuToggle;
-        public static Mgr_DebugTools? debugTools;
+        Mgr_PluginSettings.AddSetting<bool, PluginSettingToggleUIItem>(enableDebugSetting, Plugin.settingPageName, Plugin.metadata);
+        enableDebugSetting.OnValueChanged += DebugSettingChanged;
 
-        public static void Init() {
-            Mgr_ModSettings.AddSetting<ModBoolSetting, bool>("MeteorMod", enableDebugSetting);
-            enableDebugSetting.onValueChanged = (Setting.ValueChangeCallback)Delegate.Combine(
-                enableDebugSetting.onValueChanged,
-                new Setting.ValueChangeCallback(DebugSettingChanged)
-            );
+        SceneManager.sceneLoaded += SceneLoaded;
+    }
+
+    private static void DebugSettingChanged(IPluginSetting<bool> setting) {
+        bool settingValue = setting.Value;
+        SetDebugMenuState(settingValue);
+    }
+
+    private static bool firstSceneLoad = true;
+    public static void SceneLoaded(Scene scene, LoadSceneMode mode) {
+        // run only once on the title scene
+        // early return if not title scene
+        if(!MeteorCore.SceneHelper.IsTitleScene || !firstSceneLoad)
+            return;
+
+        firstSceneLoad = false;
+
+        // get debug gameobject, early return if not found
+        string gameObjectPath = "MANAGER_MASTER/Debug";
+        GameObject debugToolsGameObject = GameObject.Find(gameObjectPath);
+        if(debugToolsGameObject == null) {
+            Plugin.Logger.LogError("Could not get debug object," + gameObjectPath + "GameObject not found");
+            return;
+        }
+        debugTools = debugToolsGameObject.GetComponent<Mgr_DebugTools>();
+        if(debugTools == null) {
+            Plugin.Logger.LogError("Could not get debug, Mgr_DebugTools component not in GameObject" + gameObjectPath);
+            return;
         }
 
-        static bool firstSceneLoad = true;
-        public static void OnSceneWasLoaded(int buildIndex, string sceneName) {
-            if(sceneName == "Splash" || !firstSceneLoad)
-                return;
-            firstSceneLoad = false;
-            // get debug gameobject
-            string gameObjectPath = "MANAGER_MASTER/Debug";
-            GameObject debugToolsGameObject = GameObject.Find(gameObjectPath);
-            if(debugToolsGameObject == null) {
-                MelonLogger.Error("Could not get debug object," + gameObjectPath + "GameObject not found");
-            } else {
-                debugTools = debugToolsGameObject.GetComponent<Mgr_DebugTools>();
-                if(debugTools == null) {
-                    MelonLogger.Error("Could not get debug, Mgr_DebugTools component not in GameObject" + gameObjectPath);
-                }
-            }
-
-            // get debug button gameobject
-            debugMenuToggle = UnityEngine.Object.FindObjectOfType<DebugMenuToggle>(true);
-            if(debugMenuToggle == null) {
-                MelonLogger.Error("Could not get DebugMenuToggle");
-            }
-
-            // set debug menu state
-            SetDebugMenuState(enableDebugSetting.value);
+        // get debug button gameobject
+        debugMenuToggle = UnityEngine.Object.FindObjectOfType<DebugMenuToggle>(true);
+        if(debugMenuToggle == null) {
+            Plugin.Logger.LogError("Could not get DebugMenuToggle");
+            return;
         }
 
-        public static void DebugSettingChanged() {
-            bool settingValue = enableDebugSetting.value;
-            SetDebugMenuState(settingValue);
+        // set debug menu state to setting value
+        SetDebugMenuState(enableDebugSetting.Value);
+    }
+
+    public static void SetDebugMenuState(bool state) {
+        if(debugTools == null || debugMenuToggle == null) {
+            Plugin.Logger.LogWarning("BuiltInDebugMenuSetting errored at Init, cannot apply debug setting");
+            return;
         }
 
-        public static void SetDebugMenuState(bool state) {
-            if(debugTools == null || debugMenuToggle == null) {
-                MelonLogger.Warning("DebugTools errored at Init, cannot apply debug setting");
-                return;
-            }
-            if(IsMenuActive()) {
-                debugMenuToggle.ToggleAllDebugBoxes();
-            }
-            if(state) {
-                debugTools.DisableAllDebug = false;
-                MelonLogger.Msg("Enabled GVH debug");
-
-                debugMenuToggle.gameObject.SetActive(true);
-                MelonLogger.Msg("Enabled GVH debug button");
-            } else {
-                debugTools.DisableAllDebug = true;
-                MelonLogger.Msg("Disabled GVH debug");
-
-                debugMenuToggle.gameObject.SetActive(false);
-                MelonLogger.Msg("Disabled GVH debug button");
-
-            }
+        if(IsMenuActive()) {
+            debugMenuToggle.ToggleAllDebugBoxes();
         }
 
-        public static bool IsMenuActive() {
-            if(debugMenuToggle == null) {
-                MelonLogger.Warning("DebugMenuToggle is null");
-                return false;
-            }
-            if(debugMenuToggle.debugGameobjects.Length == 0) {
-                MelonLogger.Warning("debugGameobjects is empty");
-                return false;
-            }
-            return debugMenuToggle.debugGameobjects[0].activeInHierarchy;
+        if(state) {
+            debugTools.DisableAllDebug = false;
+            Plugin.Logger.LogInfo("Enabled GVH debug");
+
+            debugMenuToggle.gameObject.SetActive(true);
+            Plugin.Logger.LogInfo("Enabled GVH debug button");
+        } else {
+            debugTools.DisableAllDebug = true;
+            Plugin.Logger.LogInfo("Disabled GVH debug");
+
+            debugMenuToggle.gameObject.SetActive(false);
+            Plugin.Logger.LogInfo("Disabled GVH debug button");
+
         }
+    }
+
+    public static bool IsMenuActive() {
+        if(debugMenuToggle == null) {
+            Plugin.Logger.LogWarning("DebugMenuToggle is null");
+            return false;
+        }
+        if(debugMenuToggle.debugGameobjects.Length == 0) {
+            Plugin.Logger.LogWarning("debugGameobjects is empty");
+            return false;
+        }
+        return debugMenuToggle.debugGameobjects[0].activeInHierarchy;
     }
 }

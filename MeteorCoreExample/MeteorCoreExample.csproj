@@ -1,9 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
-    <AssemblyName>MeteorMod</AssemblyName>
-    <Product>Meteor Mod</Product>
+    <AssemblyName>MeteorCoreExample</AssemblyName>
+    <Product>MeteorCoreExample</Product>
+    <Description>Example plugin for using features provided by MeteorCore.</Description>
     <Version>0.2.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
@@ -12,15 +13,16 @@
       https://nuget.bepinex.dev/v3/index.json;
       https://nuget.samboy.dev/v3/index.json
     </RestoreAdditionalProjectSources>
-    <RootNamespace>MeteorMod</RootNamespace>
-    <GVHPath>D:\Games\Steam\steamapps\common\Goodbye Volcano High\</GVHPath>
+    <RootNamespace>MeteorCoreExample</RootNamespace>
   </PropertyGroup>
-  
+
   <ItemGroup>
+    <None Remove="Assets\circle.png" />
     <None Remove="Assets\localisation.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Assets\circle.png" />
     <EmbeddedResource Include="Assets\localisation.json" />
   </ItemGroup>
 
@@ -29,6 +31,7 @@
     <PackageReference Include="BepInEx.Core" Version="5.*" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
     <PackageReference Include="GoodbyeVolcanoHigh.GameLibs" Version="2024.2.6" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="UnityEngine.Modules" Version="2021.3.18" IncludeAssets="compile" />
   </ItemGroup>
@@ -37,12 +40,7 @@
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
   </ItemGroup>
   
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /f /y &quot;$(TargetPath)&quot; &quot;$(GVHPath)BepInEx\plugins\&quot;" />
-  </Target>
-  
   <ItemGroup>
     <ProjectReference Include="..\MeteorCore\MeteorCore.csproj" />
   </ItemGroup>
-  
 </Project>

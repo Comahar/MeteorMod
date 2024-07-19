@@ -1,0 +1,174 @@
+{
+    "dictionary": {
+        "en": {
+            // Setting Names
+            "Toggle": "Toggle",
+            "Slider": "Slider",
+            "List": "List",
+            "Custom Setting": "Custom Setting",
+            "Tooltip": "Tooltip",
+            // tooltips
+            "Example tooltip\n\nThis is a multiline tooltip": "Example tooltip\n\nThis is a multiline tooltip",
+            "You can also use <s>markdown</s> <b>markup</b> in the tooltip": "You can also use <s>markdown</s> <b>markup</b> in the tooltip",
+            "Options:\n- <color=#FF0000>Red</color>\n- <color=#00FF00>Green</color>\n- <color=#0000FF>Blue</color>\n- <color=#FFFF00>Yellow</color>\n- <color=#FF00FF>Magenta</color>\n- <color=#00FFFF>Cyan</color>\n- <color=#C0C0C0>Gray</color>\n- <color=#FFFFFF>White</color>\n- <color=#000000>Black</color> <- Black": "Options:\n- <color=#FF0000>Red</color>\n- <color=#00FF00>Green</color>\n- <color=#0000FF>Blue</color>\n- <color=#FFFF00>Yellow</color>\n- <color=#FF00FF>Magenta</color>\n- <color=#00FFFF>Cyan</color>\n- <color=#C0C0C0>Gray</color>\n- <color=#FFFFFF>White</color>\n- <color=#000000>Black</color> <- Black",
+            // Color Default Value
+            "<color=#FF0000>Red</color>": "<color=#FF0000>Red</color>",
+            // List Values
+            "<color=#e4eec2>Fang</color>": "<color=#e4eec2>Fang</color>",
+            "<color=#ccbdee>Trish</color>": "<color=#ccbdee>Trish</color>",
+            "<color=#f1b5b3>Reed</color>": "<color=#f1b5b3>Reed</color>",
+            "<color=#ffb576>Naser</color>": "<color=#ffb576>Naser</color>",
+            "<color=#ffd1b8>Naomi</color>": "<color=#ffd1b8>Naomi</color>",
+            "<color=#ff4f83>Rosa</color>": "<color=#ff4f83>Rosa</color>",
+            "<color=#bfa2fd>Sage</color>": "<color=#bfa2fd>Sage</color>",
+            "<color=#cfe78c>Stella</color>": "<color=#cfe78c>Stella</color>",
+            "<color=#ff641e>Mango</color>": "<color=#ff641e>Mango</color>",
+        },
+        "fr": {
+            "Toggle": "Basculer",
+            "Slider": "Curseur",
+            "List": "Liste",
+            "Custom Setting": "Paramètre personnalisé",
+            "Tooltip": "Info-bulle",
+            "Example tooltip\n\nThis is a multiline tooltip": "Info-bulle d'exemple\n\nCeci est une info-bulle multilignes",
+            "You can also use <s>markdown</s> <b>markup</b> in the tooltip": "Vous pouvez également utiliser <s>markdown</s> <b>markup</b> dans l'info-bulle",
+            "Options:\n- <color=#FF0000>Red</color>\n- <color=#00FF00>Green</color>\n- <color=#0000FF>Blue</color>\n- <color=#FFFF00>Yellow</color>\n- <color=#FF00FF>Magenta</color>\n- <color=#00FFFF>Cyan</color>\n- <color=#C0C0C0>Gray</color>\n- <color=#FFFFFF>White</color>\n- <color=#000000>Black</color> <- Black": "Options:\n- <color=#FF0000>Rouge</color>\n- <color=#00FF00>Vert</color>\n- <color=#0000FF>Bleu</color>\n- <color=#FFFF00>Jaune</color>\n- <color=#FF00FF>Magenta</color>\n- <color=#00FFFF>Cyan</color>\n- <color=#C0C0C0>Gris</color>\n- <color=#FFFFFF>Blanc</color>\n- <color=#000000>Noir</color> <- Noir",
+            "<color=#FF0000>Red</color>": "<color=#FF0000>Rouge</color>",
+            "<color=#e4eec2>Fang</color>": "<color=#e4eec2>Fang</color>",
+            "<color=#ccbdee>Trish</color>": "<color=#ccbdee>Trish</color>",
+            "<color=#f1b5b3>Reed</color>": "<color=#f1b5b3>Reed</color>",
+            "<color=#ffb576>Naser</color>": "<color=#ffb576>Naser</color>",
+            "<color=#ffd1b8>Naomi</color>": "<color=#ffd1b8>Naomi</color>",
+            "<color=#ff4f83>Rosa</color>": "<color=#ff4f83>Rosa</color>",
+            "<color=#bfa2fd>Sage</color>": "<color=#bfa2fd>Sage</color>",
+            "<color=#cfe78c>Stella</color>": "<color=#cfe78c>Stella</color>",
+            "<color=#ff641e>Mango</color>": "<color=#ff641e>Mango</color>",
+        },
+        "it": {
+            "Toggle": "Attiva/disattiva",
+            "Slider": "Cursore",
+            "List": "Elenco",
+            "Custom Setting": "Impostazione personalizzata",
+            "Tooltip": "Tooltip",
+            "Example tooltip\n\nThis is a multiline tooltip": "Esempio di tooltip\n\nQuesto è un tooltip multilinea",
+            "You can also use <s>markdown</s> <b>markup</b> in the tooltip": "Puoi anche usare <s>markdown</s> <b>markup</b> nel tooltip",
+            "Options:\n- <color=#FF0000>Red</color>\n- <color=#00FF00>Green</color>\n- <color=#0000FF>Blue</color>\n- <color=#FFFF00>Yellow</color>\n- <color=#FF00FF>Magenta</color>\n- <color=#00FFFF>Cyan</color>\n- <color=#C0C0C0>Gray</color>\n- <color=#FFFFFF>White</color>\n- <color=#000000>Black</color> <- Black": "Opzioni:\n- <color=#FF0000>Rosso</color>\n- <color=#00FF00>Verde</color>\n- <color=#0000FF>Blu</color>\n- <color=#FFFF00>Giallo</color>\n- <color=#FF00FF>Magenta</color>\n- <color=#00FFFF>Ciano</color>\n- <color=#C0C0C0>Grigio</color>\n- <color=#FFFFFF>Bianco</color>\n- <color=#000000>Nero</color> <- Nero",
+            "<color=#FF0000>Red</color>": "<color=#FF0000>Rosso</color>",
+            "<color=#e4eec2>Fang</color>": "<color=#e4eec2>Fang</color>",
+            "<color=#ccbdee>Trish</color>": "<color=#ccbdee>Trish</color>",
+            "<color=#f1b5b3>Reed</color>": "<color=#f1b5b3>Reed</color>",
+            "<color=#ffb576>Naser</color>": "<color=#ffb576>Naser</color>",
+            "<color=#ffd1b8>Naomi</color>": "<color=#ffd1b8>Naomi</color>",
+            "<color=#ff4f83>Rosa</color>": "<color=#ff4f83>Rosa</color>",
+            "<color=#bfa2fd>Sage</color>": "<color=#bfa2fd>Sage</color>",
+            "<color=#cfe78c>Stella</color>": "<color=#cfe78c>Stella</color>",
+            "<color=#ff641e>Mango</color>": "<color=#ff641e>Mango</color>",
+        },
+        "de": {
+            "Toggle": "Umschalten",
+            "Slider": "Schieberegler",
+            "List": "Liste",
+            "Custom Setting": "Benutzerdefinierte Einstellung",
+            "Tooltip": "Tooltip",
+            "Example tooltip\n\nThis is a multiline tooltip": "Beispiel-Tooltip\n\nDies ist ein mehrzeiliger Tooltip",
+            "You can also use <s>markdown</s> <b>markup</b> in the tooltip": "Sie können auch <s>Markdown</s> <b>Markup</b> im Tooltip verwenden",
+            "Options:\n- <color=#FF0000>Red</color>\n- <color=#00FF00>Green</color>\n- <color=#0000FF>Blue</color>\n- <color=#FFFF00>Yellow</color>\n- <color=#FF00FF>Magenta</color>\n- <color=#00FFFF>Cyan</color>\n- <color=#C0C0C0>Gray</color>\n- <color=#FFFFFF>White</color>\n- <color=#000000>Black</color> <- Black": "Optionen:\n- <color=#FF0000>Rot</color>\n- <color=#00FF00>Grün</color>\n- <color=#0000FF>Blau</color>\n- <color=#FFFF00>Gelb</color>\n- <color=#FF00FF>Magenta</color>\n- <color=#00FFFF>Zyan</color>\n- <color=#C0C0C0>Grau</color>\n- <color=#FFFFFF>Weiß</color>\n- <color=#000000>Schwarz</color> <- Schwarz",
+            "<color=#FF0000>Red</color>": "<color=#FF0000>Rot</color>",
+            "<color=#e4eec2>Fang</color>": "<color=#e4eec2>Fang</color>",
+            "<color=#ccbdee>Trish</color>": "<color=#ccbdee>Trish</color>",
+            "<color=#f1b5b3>Reed</color>": "<color=#f1b5b3>Reed</color>",
+            "<color=#ffb576>Naser</color>": "<color=#ffb576>Naser</color>",
+            "<color=#ffd1b8>Naomi</color>": "<color=#ffd1b8>Naomi</color>",
+            "<color=#ff4f83>Rosa</color>": "<color=#ff4f83>Rosa</color>",
+            "<color=#bfa2fd>Sage</color>": "<color=#bfa2fd>Sage</color>",
+            "<color=#cfe78c>Stella</color>": "<color=#cfe78c>Stella</color>",
+            "<color=#ff641e>Mango</color>": "<color=#ff641e>Mango</color>",
+        },
+        "es": {
+            "Toggle": "Alternar",
+            "Slider": "Deslizador",
+            "List": "Lista",
+            "Custom Setting": "Configuración personalizada",
+            "Tooltip": "Tooltip",
+            "Example tooltip\n\nThis is a multiline tooltip": "Tooltip de ejemplo\n\nEsto es un tooltip de varias líneas",
+            "You can also use <s>markdown</s> <b>markup</b> in the tooltip": "También puedes usar <s>markdown</s> <b>markup</b> en el tooltip",
+            "Options:\n- <color=#FF0000>Red</color>\n- <color=#00FF00>Green</color>\n- <color=#0000FF>Blue</color>\n- <color=#FFFF00>Yellow</color>\n- <color=#FF00FF>Magenta</color>\n- <color=#00FFFF>Cyan</color>\n- <color=#C0C0C0>Gray</color>\n- <color=#FFFFFF>White</color>\n- <color=#000000>Black</color> <- Black": "Opciones:\n- <color=#FF0000>Rojo</color>\n- <color=#00FF00>Verde</color>\n- <color=#0000FF>Azul</color>\n- <color=#FFFF00>Amarillo</color>\n- <color=#FF00FF>Magenta</color>\n- <color=#00FFFF>Cian</color>\n- <color=#C0C0C0>Gris</color>\n- <color=#FFFFFF>Blanco</color>\n- <color=#000000>Negro</color> <- Negro",
+            "<color=#FF0000>Red</color>": "<color=#FF0000>Rojo</color>",
+            "<color=#e4eec2>Fang</color>": "<color=#e4eec2>Fang</color>",
+            "<color=#ccbdee>Trish</color>": "<color=#ccbdee>Trish</color>",
+            "<color=#f1b5b3>Reed</color>": "<color=#f1b5b3>Reed</color>",
+            "<color=#ffb576>Naser</color>": "<color=#ffb576>Naser</color>",
+            "<color=#ffd1b8>Naomi</color>": "<color=#ffd1b8>Naomi</color>",
+            "<color=#ff4f83>Rosa</color>": "<color=#ff4f83>Rosa</color>",
+            "<color=#bfa2fd>Sage</color>": "<color=#bfa2fd>Sage</color>",
+            "<color=#cfe78c>Stella</color>": "<color=#cfe78c>Stella</color>",
+            "<color=#ff641e>Mango</color>": "<color=#ff641e>Mango</color>",
+        },
+        "ru": {
+            "Toggle": "Переключить",
+            "Slider": "Ползунок",
+            "List": "Список",
+            "Custom Setting": "Пользовательская настройка",
+            "Tooltip": "Всплывающая подсказка",
+            "Example tooltip\n\nThis is a multiline tooltip": "Пример всплывающей подсказки\n\nЭто многострочная всплывающая подсказка",
+            "You can also use <s>markdown</s> <b>markup</b> in the tooltip": "Вы также можете использовать <s>markdown</s> <b>разметку</b> во всплывающей подсказке",
+            "Options:\n- <color=#FF0000>Red</color>\n- <color=#00FF00>Green</color>\n- <color=#0000FF>Blue</color>\n- <color=#FFFF00>Yellow</color>\n- <color=#FF00FF>Magenta</color>\n- <color=#00FFFF>Cyan</color>\n- <color=#C0C0C0>Gray</color>\n- <color=#FFFFFF>White</color>\n- <color=#000000>Black</color> <- Black": "Опции:\n- <color=#FF0000>Красный</color>\n- <color=#00FF00>Зелёный</color>\n- <color=#0000FF>Синий</color>\n- <color=#FFFF00>Жёлтый</color>\n- <color=#FF00FF>Магента</color>\n- <color=#00FFFF>Циан</color>\n- <color=#C0C0C0>Серый</color>\n- <color=#FFFFFF>Белый</color>\n- <color=#000000>Чёрный</color> <- Чёрный",
+            "<color=#FF0000>Red</color>": "<color=#FF0000>Красный</color>",
+            "<color=#e4eec2>Fang</color>": "<color=#e4eec2>Fang</color>",
+            "<color=#ccbdee>Trish</color>": "<color=#ccbdee>Trish</color>",
+            "<color=#f1b5b3>Reed</color>": "<color=#f1b5b3>Reed</color>",
+            "<color=#ffb576>Naser</color>": "<color=#ffb576>Naser</color>",
+            "<color=#ffd1b8>Naomi</color>": "<color=#ffd1b8>Naomi</color>",
+            "<color=#ff4f83>Rosa</color>": "<color=#ff4f83>Rosa</color>",
+            "<color=#bfa2fd>Sage</color>": "<color=#bfa2fd>Sage</color>",
+            "<color=#cfe78c>Stella</color>": "<color=#cfe78c>Stella</color>",
+            "<color=#ff641e>Mango</color>": "<color=#ff641e>Mango</color>",
+        },
+        "ja": {
+            "Toggle": "トグル",
+            "Slider": "スライダー",
+            "List": "リスト",
+            "Custom Setting": "カスタム設定",
+            "Tooltip": "ツールチップ",
+            "Example tooltip\n\nThis is a multiline tooltip": "例のツールチップ\n\nこれは複数行のツールチップです",
+            "You can also use <s>markdown</s> <b>markup</b> in the tooltip": "ツールチップに <s>マークダウン</s> <b>マークアップ</b> を使用することもできます",
+            "Options:\n- <color=#FF0000>Red</color>\n- <color=#00FF00>Green</color>\n- <color=#0000FF>Blue</color>\n- <color=#FFFF00>Yellow</color>\n- <color=#FF00FF>Magenta</color>\n- <color=#00FFFF>Cyan</color>\n- <color=#C0C0C0>Gray</color>\n- <color=#FFFFFF>White</color>\n- <color=#000000>Black</color> <- Black": "オプション:\n- <color=#FF0000>赤</color>\n- <color=#00FF00>緑</color>\n- <color=#0000FF>青</color>\n- <color=#FFFF00>黄</color>\n- <color=#FF00FF>マゼンタ</color>\n- <color=#00FFFF>シアン</color>\n- <color=#C0C0C0>灰色</color>\n- <color=#FFFFFF>白</color>\n- <color=#000000>黒</color> <- 黒",
+            "<color=#FF0000>Red</color>": "<color=#FF0000>赤</color>",
+            "<color=#e4eec2>Fang</color>": "<color=#e4eec2>Fang</color>",
+            "<color=#ccbdee>Trish</color>": "<color=#ccbdee>Trish</color>",
+            "<color=#f1b5b3>Reed</color>": "<color=#f1b5b3>Reed</color>",
+            "<color=#ffb576>Naser</color>": "<color=#ffb576>Naser</color>",
+            "<color=#ffd1b8>Naomi</color>": "<color=#ffd1b8>Naomi</color>",
+            "<color=#ff4f83>Rosa</color>": "<color=#ff4f83>Rosa</color>",
+            "<color=#bfa2fd>Sage</color>": "<color=#bfa2fd>Sage</color>",
+            "<color=#cfe78c>Stella</color>": "<color=#cfe78c>Stella</color>",
+            "<color=#ff641e>Mango</color>": "<color=#ff641e>Mango</color>",
+        }
+    },
+    "additionalDictionaries": {
+        "MISC": {
+            "en": {
+                // Setting Menu Tab name
+                "Examples": "Examples"
+            },
+            "fr": {
+                "Examples": "Exemples"
+            },
+            "it": {
+                "Examples": "Esempi"
+            },
+            "de": {
+                "Examples": "Beispiele"
+            },
+            "es": {
+                "Examples": "Ejemplos"
+            },
+            "ru": {
+                "Examples": "Примеры"
+            },
+            "ja": {
+                "Examples": "例"
+            }
+        }
+    }
+}

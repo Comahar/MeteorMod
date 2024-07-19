@@ -1,40 +1,43 @@
 ﻿using System.Collections;
 using UnityEngine.SceneManagement;
-using MelonLoader;
 using HarmonyLib;
-using MeteorMod.ModSettings;
-using MeteorMod.ModSettings.ModSettingItems;
+using MeteorCore.Setting;
 
-namespace MeteorMod.Settings {
-    public static class SkipSplashScreenSetting {
-        public static ModBoolSetting skipSplashScreenSetting = new ModBoolSetting(
-            "SkipSplashScreen",
-            "Skip Splash Screen",
-            "Skips the start splash screen",
-            "MISC",
-            false
+namespace MeteorMod.Settings;
+public static class SkipSplashScreenSetting {
+    public static PluginSettingBool skipSplashScreenSetting;
+
+    public static void Init() {
+        skipSplashScreenSetting = new PluginSettingBool(
+            settingKey: "SkipSplashScreen",
+            settingName: "Skip Splash Screen",
+            tooltip: "Skips the start splash screen",
+            configSection: MyPluginInfo.PLUGIN_NAME,
+            owner: Plugin.metadata,
+            defaultValue: false
         );
 
-        public static void Init() {
-            Mgr_ModSettings.AddSetting<ModBoolSetting, bool>("MeteorMod", skipSplashScreenSetting);
-        }
+        Mgr_PluginSettings.AddSetting<bool, PluginSettingToggleUIItem>(skipSplashScreenSetting, Plugin.settingPageName, Plugin.metadata);
     }
 
     [HarmonyPatch(typeof(SplashScreen), nameof(SplashScreen.Start))]
     public class SplashScreen_Start_Patch_Skip {
-        public static bool Prefix(SplashScreen __instance) {
-            bool skipSplashScreen = SkipSplashScreenSetting.skipSplashScreenSetting.value;
-
+        static bool Prefix(SplashScreen __instance) {
+            if(skipSplashScreenSetting == null) {
+                Plugin.Logger.LogError("SkipSplashScreenSetting is null");
+                return true;
+            }
+            bool skipSplashScreen = skipSplashScreenSetting.Value;
             if(!skipSplashScreen) {
                 return true;
             }
-            MelonLogger.Msg("Skipping SplashScreen");
+            Plugin.Logger.LogInfo("Skipping SplashScreen");
             var result = Skip(__instance);
             __instance.StartCoroutine(result);
             return false;
         }
 
-        public static IEnumerator Skip(SplashScreen instance) {
+        static IEnumerator Skip(SplashScreen instance) {
             var loadSceneOp = SceneManager.LoadSceneAsync("Title", LoadSceneMode.Additive);
             while(!loadSceneOp.isDone) {
                 yield return null;

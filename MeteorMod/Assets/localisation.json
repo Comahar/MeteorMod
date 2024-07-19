@@ -1,0 +1,43 @@
+{
+  "dictionary": {
+    "en": {
+      "Enable Debug Menu": "Enable Debug Menu",
+      "Enables debugTools and debug menu\n\nAccess the menu with CTRL+SHIFT+D": "Enables debugTools and debug menu\n\nAccess the menu with CTRL+SHIFT+D",
+      "Skip Splash Screen": "Skip Splash Screen",
+      "Skips the start splash screen": "Skips the start splash screen",
+      "Debug Menu": "Debug Menu",
+      "Enables debug tools and the developer's debug menu. Access the menu with CTRL+SHIFT+D": "Enables debug tools and the developer's debug menu. Access the menu with CTRL+SHIFT+D",
+      "Show Hidden Settings": "Show Hidden Settings",
+      "Shows hidden settings.\n\nAs they are hidden there is a good chance they may not work.\nThey are labelled <color=#FFFFB2>yellow</color>.": "Shows hidden settings.\n\nAs they are hidden there is a good chance they may not work.\nThey are labelled <color=#FFFFB2>yellow</color>.",
+      "Disable Beatmaps": "Disable Beatmaps",
+      "Disables rhythm game segments' interactivity and UI.\nWhile in a performance toggle with CTRL+SHIFT+F": "Disables rhythm game segments' interactivity and UI.\nWhile in a performance toggle with CTRL+SHIFT+F",
+      "Disable Subtitles": "Disable Subtitles",
+      "Disables subtitles in the game": "Disables subtitles in the game",
+    }
+  },
+  "additionalDictionaries": {
+    "MISC": {
+      "en": {
+        "Meteor Mod": "Meteor Mod",
+      },
+      "fr": {
+        "Meteor Mod": "Meteor Mod",
+      },
+      "it": {
+        "Meteor Mod": "Meteor Mod",
+      },
+      "de": {
+        "Meteor Mod": "Meteor Mod",
+      },
+      "es": {
+        "Meteor Mod": "Meteor Mod",
+      },
+      "ru": {
+        "Meteor Mod": "Метеор Мод",
+      },
+      "ja": {
+        "Meteor Mod": "メテオモード",
+      }
+    }
+  }
+}
