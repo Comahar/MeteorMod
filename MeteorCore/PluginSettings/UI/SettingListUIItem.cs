@@ -162,7 +162,7 @@ public class PluginSettingListUIItem<T> : PluginSettingUIItem<PluginSettingList<
     }
 
     public override void RevertToDefault() {
-        this.setting.RevertPendingValue();
+        this.setting.SetValue(this.setting.DefaultValue, save: false, pending: false, notify: true);
         this.selectedOptionIndex = this.setting.GetOptionIndex(this.setting.Value);
         Mgr_AudioPersistant.Instance.oneShotAudioSource.PlayOneShot(this.settingChangedAudio, this.sfxVol);
         this.Refresh();

@@ -109,35 +109,31 @@ public class PluginSettingSliderUIItem : PluginSettingUIItem<PluginSettingFloat,
     }
 
     private void MoveDownStep() {
+        Mgr_AudioPersistant.Instance.oneShotAudioSource.PlayOneShot(this.settingChangedAudio, this.sfxVol);
         this.SetValue(this.setting.PendingValue - this.setting.steps);
     }
 
     private void MoveUpStep() {
+        Mgr_AudioPersistant.Instance.oneShotAudioSource.PlayOneShot(this.settingChangedAudio, this.sfxVol);
         this.SetValue(this.setting.PendingValue + this.setting.steps);
     }
 
     public override void SetValue(float value, bool save = false, bool pending = true, bool notify = true) {
         value = this.setting.Normalize(value);
-        this.slider.value = value;
         this.setting.SetValue(value, save: save, pending: pending, notify: notify);
         this.Refresh();
     }
 
     public override void RevertToDefault() {
         if(!this.IsDirty()) {
-            this.RefreshDirtyIndicator();
             return;
         }
         Mgr_AudioPersistant.Instance.oneShotAudioSource.PlayOneShot(this.settingChangedAudio, this.sfxVol);
         this.setting.SetValue(this.setting.DefaultValue, save: false, pending: false, notify: true);
-        this.RefreshDirtyIndicator();
-        this.slider.value = this.setting.DefaultValue;
+        this.Refresh();
     }
 
-    protected override void OnLanguagedChanged() {
-    }
-
-
+    protected override void OnLanguagedChanged() { }
 
     protected virtual void OnSliderValueChanged(float value) {
         value = this.setting.Normalize(value);
@@ -157,9 +153,18 @@ public class PluginSettingSliderUIItem : PluginSettingUIItem<PluginSettingFloat,
     protected override void Refresh() {
         base.Refresh();
         this.RefreshDirtyIndicator();
-        if(this.setting != null) {
-            this.valueLabel.text = this.setting.GetPendingValueText();
-        }
+        this.RefreshValueLabel();
     }
 
+    protected virtual void RefreshValueLabel() {
+        if(this.setting != null) {
+            if(this.valueLabel != null) {
+                this.valueLabel.text = this.setting.GetPendingValueText();
+            }
+            if(this.slider != null) {
+                Plugin.Logger.LogInfo("Setting slider value to " + this.setting.PendingValue);
+                this.slider.value = this.setting.PendingValue;
+            }
+        }
+    }
 }

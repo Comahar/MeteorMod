@@ -77,7 +77,8 @@ public class PluginSettingToggleUIItem : PluginSettingUIItem<PluginSettingBool, 
         localiser.Dictionary = PluginLocaliser.ConvertPluginToDictionaryName(setting.owner);
 
         toggleGameObject.SetActive(true);
-        thisComponent.RefreshLabel();
+        thisComponent.Refresh();
+        thisComponent.SetT(thisComponent.setting.PendingValue ? 1f : 0f);
         return toggleGameObject;
     }
 
@@ -97,13 +98,12 @@ public class PluginSettingToggleUIItem : PluginSettingUIItem<PluginSettingBool, 
 
     public virtual void Toggle() {
         Mgr_AudioPersistant.Instance.oneShotAudioSource.PlayOneShot(this.settingChangedAudio, this.sfxVol);
-        this.SetValue(!this.setting.PendingValue);
-        this.RefreshLabel();
+        this.SetValue(!this.setting.PendingValue, save: false, pending: true, notify: true);
     }
 
     public override void SetValue(bool value, bool save = false, bool pending = true, bool notify = true) {
         this.setting.SetValue(value, save: save, pending: pending, notify: notify);
-        this.RefreshDirtyIndicator();
+        this.Refresh();
         this.TriggerAnimation();
     }
 
@@ -113,16 +113,20 @@ public class PluginSettingToggleUIItem : PluginSettingUIItem<PluginSettingBool, 
         }
         Mgr_AudioPersistant.Instance.oneShotAudioSource.PlayOneShot(this.settingChangedAudio, this.sfxVol);
         this.setting.SetValue(this.setting.DefaultValue, save: false, pending: false, notify: true);
-        this.RefreshDirtyIndicator();
+        this.Refresh();
         this.TriggerAnimation();
     }
 
-    protected virtual void RefreshLabel() {
-        this.SetT(this.setting.PendingValue ? 1f : 0f);
-        this.OnLanguagedChanged();
+    protected override void OnLanguagedChanged() {
+        this.Refresh();
     }
 
-    protected override void OnLanguagedChanged() {
+    protected override void Refresh() {
+        base.Refresh();
+        this.RefreshValueLabel();
+    }
+
+    protected virtual void RefreshValueLabel() {
         if(this.valueLabel != null) {
             this.valueLabel.text = this.setting.GetPendingValueText();
         }

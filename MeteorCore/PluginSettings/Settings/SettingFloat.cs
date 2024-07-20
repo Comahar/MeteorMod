@@ -33,10 +33,6 @@ public class PluginSettingFloat : PluginSetting<float> {
     public float steps { get; set; }
     public override void SetValue(float value, bool save, bool pending, bool notify) {
         value = this.Normalize(value);
-        if(pending && value == this.PendingValue)
-            return;
-        if(!pending && value == this.Value)
-            return;
         base.SetValue(value, save: save, pending: pending, notify: notify);
     }
 

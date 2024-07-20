@@ -128,7 +128,7 @@ public class MySettingColorUIItem : PluginSettingUIItem<MySettingColor, Color> {
 
     public override void SetValue(Color color, bool save = false, bool pending = true, bool notify = true) {
         this.setting.SetValue(color, save: save, pending: pending, notify: notify);
-        this.RefreshDirtyIndicator();
+        this.Refresh();
     }
 
     public override void RevertToDefault() {
@@ -137,6 +137,13 @@ public class MySettingColorUIItem : PluginSettingUIItem<MySettingColor, Color> {
         }
         Mgr_AudioPersistant.Instance.oneShotAudioSource.PlayOneShot(this.settingChangedAudio, this.sfxVol);
         this.setting.SetValue(this.setting.DefaultValue, save: false, pending: false, notify: true);
+        int index = this.setting.options.ToList().IndexOf(this.setting.Value);
+        this.selectableGroupController.SelectElement(index);
+        this.Refresh();
+    }
+
+    protected override void Refresh() {
+        base.Refresh();
         this.RefreshDirtyIndicator();
     }
 

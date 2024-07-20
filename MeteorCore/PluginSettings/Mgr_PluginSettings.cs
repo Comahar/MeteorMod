@@ -135,6 +135,7 @@ public class Mgr_PluginSettings : MonoBehaviour {
         });
 
         // set current setting value to config entry value
+        setting.SetValue(configEntry.Value, save: false, pending: true, notify: false);
         setting.SetValue(configEntry.Value, save: false, pending: false, notify: false);
     }
 
