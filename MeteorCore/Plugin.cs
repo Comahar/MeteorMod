@@ -5,39 +5,39 @@ using HarmonyLib;
 using MeteorCore.Setting;
 using BepInEx.Configuration;
 
-namespace MeteorCore {
-    [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
-    public class Plugin : BaseUnityPlugin {
-        internal static new ManualLogSource Logger;
-        internal static Transform PluginManager;
-        internal static Harmony harmony;
-        internal static BepInPlugin metadata;
+namespace MeteorCore;
 
-        private void Awake() {
-            ConfigEntry<bool> unityLogging = this.Config.Bind("General", "UnityLogging", true, "Enables unity logging");
-            // Enable unity logging, this is disabled by default for some reason
-            Debug.unityLogger.logEnabled = unityLogging.Value;
-            Debug.unityLogger.filterLogType = LogType.Warning;
+[BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
+public class Plugin : BaseUnityPlugin {
+    internal static new ManualLogSource Logger;
+    internal static Transform PluginManager;
+    internal static Harmony harmony;
+    internal static BepInPlugin metadata;
 
-            metadata = MetadataHelper.GetMetadata(this);
+    private void Awake() {
+        ConfigEntry<bool> unityLogging = this.Config.Bind("General", "UnityLogging", true, "Enables unity logging");
+        // Enable unity logging, this is disabled by default for some reason
+        Debug.unityLogger.logEnabled = unityLogging.Value;
+        Debug.unityLogger.filterLogType = LogType.Warning;
 
-            Logger = base.Logger;
-            Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
+        metadata = MetadataHelper.GetMetadata(this);
 
-            harmony = new Harmony(MyPluginInfo.PLUGIN_GUID);
-            harmony.PatchAll();
+        Logger = base.Logger;
+        Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
 
-            // Register localisation
-            Localiser.PluginLocaliser.RegisterPlugin(metadata);
+        harmony = new Harmony(MyPluginInfo.PLUGIN_GUID);
+        harmony.PatchAll();
 
-            // Create plugin manager
-            var managerMaster = GameObject.Find("MANAGER_MASTER");
-            PluginManager = new GameObject("MeteorCore").transform;
-            PluginManager.SetParent(managerMaster.transform);
+        // Register localisation
+        Localiser.PluginLocaliser.RegisterPlugin(metadata);
 
-            // Plugin Hooks
-            SceneHelper.Init();
-            Mgr_PluginSettings.Create();
-        }
+        // Create plugin manager
+        var managerMaster = GameObject.Find("MANAGER_MASTER");
+        PluginManager = new GameObject("MeteorCore").transform;
+        PluginManager.SetParent(managerMaster.transform);
+
+        // Plugin Hooks
+        SceneHelper.Init();
+        Mgr_PluginSettings.Create();
     }
 }
