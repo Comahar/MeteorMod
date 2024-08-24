@@ -1,4 +1,4 @@
-# MeteorMod ![alt](ThunderStore/MeteorMod_icon_small.png "test")
+# MeteorMod ![alt](ThunderStore/MeteorMod_icon_small.png "MeteorMod")
 
 ## Installation
 ### Thunderstore
