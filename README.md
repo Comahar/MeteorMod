@@ -1,7 +1,13 @@
-# MeteorMod
+# MeteorMod ![alt](ThunderStore/MeteorMod_icon_small.png "test")
 
 ## Installation
+### Thunderstore
+- Install either [r2modman](https://github.com/ebkr/r2modmanPlus/releases/latest) (scroll down to Assets) or [Thunderstore (needs overwolf)](https://www.overwolf.com/app/Thunderstore-Thunderstore_Mod_Manager)
+- Open the mod manager and select the game
+- Search for [MeteorMod](https://thunderstore.io/c/goodbye-volcano-high/p/Comahar/MeteorMod/)
+- Click Install
 
+### Manual
 - Download and install [BepinEx](https://docs.bepinex.dev/articles/user_guide/installation/index.html).
     - You can also follow onyx-mp4's beatiful [BepinEx installation guide](https://onyx-mp4.github.io/?scene=bepinex-unzip).
 - Download latest release from [Releases](https://github.com/Comahar/MeteorMod/releases/latest/download/MeteorMod.zip).

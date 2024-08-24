@@ -1,0 +1,9 @@
+{
+    "name": "MeteorCore",
+    "description": "Core mod providing localization and setting interfaces for other mods.",
+    "version_number": "0.2.1",
+    "dependencies": [
+        "BepInEx-BepInExPack-5.4.2100"
+    ],
+    "website_url": "https://github.com/Comahar/MeteorMod"
+}
