@@ -87,8 +87,8 @@ Even though some of these may be impossible to implement due to the game's limit
 - [x] Beatmap disable setting
 	- [ ] Disable beatcatcher sounds
 - [ ] Disable affinity remember icon (is this neeeded?)
-- [ ] Affinity Editor (needs custom settings menu)
-- [x] Chapter Select (check out [ChapterSelect](https://github.com/onyx-mp4/ChapterSelect))
+- [x] [AffinityEditor](https://github.com/Comahar/AffinityEditor)
+- [x] [ChapterSelect](https://github.com/onyx-mp4/ChapterSelect)
 - [ ] Post Episode Report (does it even work? how to hook?)
 - [ ] Custom Beatmaps
 - [ ] Custom Songs
